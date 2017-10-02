@@ -110,11 +110,12 @@ namespace BinarySearchTree
             }
 
 
-            public void PreOrder(Node root) {
+            public void PreOrder(Node root)
+            {
                 if (root == null) return;
-                    Console.Write(root.Data + " ");
-                    PreOrder(root.LeftChild);
-                    PreOrder(root.RightChild);
+                Console.Write(root.Data + " ");
+                PreOrder(root.LeftChild);
+                PreOrder(root.RightChild);
             }
 
             public void InOrder(Node root)
@@ -133,6 +134,31 @@ namespace BinarySearchTree
                 Console.Write(root.Data + " ");
             }
 
+            public void MinValueBST(Node root)
+            {
+                if (root == null)
+                {
+                    return;
+                }
+                else if (root.LeftChild == null)
+                {
+                    Console.WriteLine("\nMinimum value in BST is {0}", root.Data);
+                }
+                MinValueBST(root.LeftChild);
+            }
+
+            public void MaxValueBST(Node root)
+            {
+                if (root == null)
+                {
+                    return;
+                }
+                else if (root.RightChild == null)
+                {
+                    Console.WriteLine("\nMaximum value in BST is {0}", root.Data); ;
+                }
+                MaxValueBST(root.RightChild);
+            }
 
             void printUtil(Node root)
             {
@@ -162,20 +188,22 @@ namespace BinarySearchTree
             tree.Add(34);
             tree.Add(18);
             tree.Add(55);
-            tree.Add(-1);
-            tree.Add(-2);
+            tree.Add(1);
+            tree.Add(3);
 
-            tree.Print();
-            Console.WriteLine(tree.Search(2));
-            Console.WriteLine(tree.Search(100));
+            //tree.Print();
+            //Console.WriteLine(tree.Search(2));
+            //Console.WriteLine(tree.Search(100));
 
-            //PreOrder Traversal
-            Console.WriteLine("PreOrder Traversal");
-            tree.PreOrder(tree.root);
-            Console.WriteLine("\nInOrder Traversal");
-            tree.InOrder(tree.root);
-            Console.WriteLine("\nPostOrder Traversal");
-            tree.PostOrder(tree.root);
+            //Console.WriteLine("PreOrder Traversal");
+            //tree.PreOrder(tree.root);
+            //Console.WriteLine("\nInOrder Traversal");
+            //tree.InOrder(tree.root);
+            //Console.WriteLine("\nPostOrder Traversal");
+            //tree.PostOrder(tree.root);
+
+            tree.MinValueBST(tree.root);
+            tree.MaxValueBST(tree.root);
 
             Console.ReadLine();
         }
