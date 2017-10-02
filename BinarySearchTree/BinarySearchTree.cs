@@ -160,6 +160,16 @@ namespace BinarySearchTree
                 MaxValueBST(root.RightChild);
             }
 
+            public int HeightBST(Node root)
+            {
+                if (root == null)
+                {
+                    return -1;
+                }
+
+                return Math.Max(HeightBST(root.LeftChild), HeightBST(root.RightChild)) + 1;
+            }
+
             void printUtil(Node root)
             {
                 if (root == null)
@@ -178,6 +188,7 @@ namespace BinarySearchTree
                 printUtil(root);
             }
 
+
         }
 
         static void Main(string[] args)
@@ -190,7 +201,7 @@ namespace BinarySearchTree
             tree.Add(55);
             tree.Add(1);
             tree.Add(3);
-
+           
             //tree.Print();
             //Console.WriteLine(tree.Search(2));
             //Console.WriteLine(tree.Search(100));
@@ -202,9 +213,10 @@ namespace BinarySearchTree
             //Console.WriteLine("\nPostOrder Traversal");
             //tree.PostOrder(tree.root);
 
-            tree.MinValueBST(tree.root);
-            tree.MaxValueBST(tree.root);
-
+            //tree.MinValueBST(tree.root);
+            //tree.MaxValueBST(tree.root);
+            int heightBST = tree.HeightBST(tree.root);
+            Console.WriteLine("\nHeight of the BST is {0}", heightBST);
             Console.ReadLine();
         }
     }
