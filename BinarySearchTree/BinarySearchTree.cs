@@ -55,7 +55,7 @@ namespace BinarySearchTree
 
         public class BST
         {
-            Node root;
+            public Node root;
 
             public BST()
             {
@@ -109,6 +109,31 @@ namespace BinarySearchTree
                 return found;
             }
 
+
+            public void PreOrder(Node root) {
+                if (root == null) return;
+                    Console.Write(root.Data + " ");
+                    PreOrder(root.LeftChild);
+                    PreOrder(root.RightChild);
+            }
+
+            public void InOrder(Node root)
+            {
+                if (root == null) return;
+                InOrder(root.LeftChild);
+                Console.Write(root.Data + " ");
+                InOrder(root.RightChild);
+            }
+
+            public void PostOrder(Node root)
+            {
+                if (root == null) return;
+                PostOrder(root.LeftChild);
+                PostOrder(root.RightChild);
+                Console.Write(root.Data + " ");
+            }
+
+
             void printUtil(Node root)
             {
                 if (root == null)
@@ -143,6 +168,15 @@ namespace BinarySearchTree
             tree.Print();
             Console.WriteLine(tree.Search(2));
             Console.WriteLine(tree.Search(100));
+
+            //PreOrder Traversal
+            Console.WriteLine("PreOrder Traversal");
+            tree.PreOrder(tree.root);
+            Console.WriteLine("\nInOrder Traversal");
+            tree.InOrder(tree.root);
+            Console.WriteLine("\nPostOrder Traversal");
+            tree.PostOrder(tree.root);
+
             Console.ReadLine();
         }
     }
