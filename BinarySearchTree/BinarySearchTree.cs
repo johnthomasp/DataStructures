@@ -134,30 +134,24 @@ namespace BinarySearchTree
                 Console.Write(root.Data + " ");
             }
 
-            public void MinValueBST(Node root)
+            public Node MinValueBST(Node root)
             {
-                if (root == null)
+                if ((root == null) || (root.LeftChild == null))
                 {
-                    return;
+                    return root;
                 }
-                else if (root.LeftChild == null)
-                {
-                    Console.WriteLine("\nMinimum value in BST is {0}", root.Data);
-                }
-                MinValueBST(root.LeftChild);
+                root = MinValueBST(root.LeftChild);
+                return root;
             }
 
-            public void MaxValueBST(Node root)
+            public Node MaxValueBST(Node root)
             {
-                if (root == null)
+                if ((root == null) || (root.RightChild == null))
                 {
-                    return;
+                    return root;
                 }
-                else if (root.RightChild == null)
-                {
-                    Console.WriteLine("\nMaximum value in BST is {0}", root.Data); ;
-                }
-                MaxValueBST(root.RightChild);
+                root = MaxValueBST(root.RightChild);
+                return root;
             }
 
             public int HeightBST(Node root)
@@ -188,7 +182,6 @@ namespace BinarySearchTree
                 printUtil(root);
             }
 
-
         }
 
         static void Main(string[] args)
@@ -201,7 +194,9 @@ namespace BinarySearchTree
             tree.Add(55);
             tree.Add(1);
             tree.Add(3);
-           
+            tree.Add(-1);
+            tree.Add(-2);
+
             //tree.Print();
             //Console.WriteLine(tree.Search(2));
             //Console.WriteLine(tree.Search(100));
@@ -213,10 +208,14 @@ namespace BinarySearchTree
             //Console.WriteLine("\nPostOrder Traversal");
             //tree.PostOrder(tree.root);
 
-            //tree.MinValueBST(tree.root);
-            //tree.MaxValueBST(tree.root);
-            int heightBST = tree.HeightBST(tree.root);
-            Console.WriteLine("\nHeight of the BST is {0}", heightBST);
+            Node minValue = tree.MinValueBST(tree.root);
+            Console.WriteLine("\nMin Value of BST is {0}", minValue.Data);
+
+            Node maxValue = tree.MaxValueBST(tree.root);
+            Console.WriteLine("\nMax Value of BST is {0}", maxValue.Data);
+
+            //int heightBST = tree.HeightBST(tree.root);
+            //Console.WriteLine("\nHeight of the BST is {0}", heightBST);
             Console.ReadLine();
         }
     }
