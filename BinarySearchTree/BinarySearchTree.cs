@@ -86,6 +86,54 @@ namespace BinarySearchTree
                 return root;
             }
 
+            public void Delete(int data)
+            {
+                root = Delete(root, data);
+            }
+
+            public Node Delete(Node root, int data)
+            {
+                if (root == null) return root;
+                else if (data < root.Data)
+                {
+                    root.LeftChild = Delete(root.LeftChild, data);
+                }
+                else if (data > root.Data)
+                {
+                    root.RightChild = Delete(root.RightChild, data);
+                }
+                else
+                {
+                    //Case 1: No Child
+                    if ((root.LeftChild == null) && (root.RightChild == null))
+                    {
+                        root = null;
+                    }
+                    //Case 2: One Child
+                    else if (root.LeftChild == null)
+                    {
+                        Node temp = root;
+                        root = root.RightChild;
+                        temp = null;
+                    }
+                    else if (root.RightChild == null)
+                    {
+                        Node temp = root;
+                        root = root.LeftChild;
+                        temp = null;
+                    }
+                    //Case 2: Two Child
+                    else
+                    {
+                        Node temp = MinValueBST(root.RightChild);
+                        root.Data = temp.Data;
+                        root.RightChild = Delete(root.RightChild, temp.Data);
+                        //temp = null;
+                    }
+                }
+                return root;
+            }
+
             public bool Search(int text)
             {
                 return Search(root, text);
@@ -109,7 +157,6 @@ namespace BinarySearchTree
                 }
                 return found;
             }
-
 
             public void PreOrder(Node root)
             {
@@ -164,6 +211,7 @@ namespace BinarySearchTree
 
                 return Math.Max(HeightBST(root.LeftChild), HeightBST(root.RightChild)) + 1;
             }
+
             void printUtil(Node root, int space)
             {
                 if (root == null)
@@ -204,7 +252,7 @@ namespace BinarySearchTree
             tree.Add(-1);
             tree.Add(-2);
 
-            tree.Print();
+            //tree.Print();
             //Console.WriteLine(tree.Search(2));
             //Console.WriteLine(tree.Search(100));
 
@@ -223,6 +271,14 @@ namespace BinarySearchTree
 
             //int heightBST = tree.HeightBST(tree.root);
             //Console.WriteLine("\nHeight of the BST is {0}", heightBST);
+
+
+            Console.WriteLine("\nBefore Deleting");
+            tree.Print();
+
+            Console.WriteLine("\nAfter Deleting");
+            tree.Delete(34);
+            tree.Print();
             Console.ReadLine();
         }
     }
