@@ -204,6 +204,40 @@ namespace BinarySearchTree
                 }
             }
 
+
+            public void LevelOrderPrint(Node root)
+            {    
+                if (root == null) return;
+                Queue<Node> q = new Queue<Node>();
+                int levelCount = 1;
+                int currentCount = 0;
+                q.Enqueue(root);
+                while (q.Count != 0)
+                {
+                    while (levelCount > 0)
+                    {
+                        root = q.Dequeue();
+                        Console.Write(root.Data + " ");
+                        if (root.LeftChild != null)
+                        {
+                            currentCount++;
+                            q.Enqueue(root.LeftChild);
+                        }
+
+                        if (root.RightChild != null)
+                        {
+                            currentCount++;
+                            q.Enqueue(root.RightChild);
+                        }
+
+                        levelCount--;
+                    }
+                    Console.WriteLine();
+                    levelCount = currentCount;
+                    currentCount = 0;
+                }
+            }
+
             public Node MinValueBST(Node root)
             {
                 if ((root == null) || (root.LeftChild == null))
@@ -266,6 +300,7 @@ namespace BinarySearchTree
                 printUtil(root, 0);
             }
 
+           
         }
 
         static void Main(string[] args)
@@ -280,7 +315,8 @@ namespace BinarySearchTree
             tree.Add(3);
             tree.Add(-1);
             tree.Add(-2);
-
+            tree.Add(6);
+            tree.Add(7);
             tree.Print();
             //Console.WriteLine(tree.Search(2));
             //Console.WriteLine(tree.Search(100));
@@ -291,8 +327,11 @@ namespace BinarySearchTree
             //tree.InOrder(tree.root);
             //Console.WriteLine("\nPostOrder Traversal");
             //tree.PostOrder(tree.root);
-            Console.WriteLine("\nLevelOrder Traversal");
-            tree.LevelOrder(tree.root);
+            //Console.WriteLine("\nLevelOrder Traversal");
+            //tree.LevelOrder(tree.root);
+
+            Console.WriteLine("\nFormat & Print LevelOrder Traversal");
+            tree.LevelOrderPrint(tree.root);
 
 
             //Node minValue = tree.MinValueBST(tree.root);
@@ -306,7 +345,7 @@ namespace BinarySearchTree
 
             //int sizeBST = tree.SizeBST(tree.root);
             //Console.WriteLine("\nSize of the BST is {0}", sizeBST);
-            
+
             //Console.WriteLine("\nBefore Deleting");
             //tree.Print();
 
