@@ -212,6 +212,14 @@ namespace BinarySearchTree
                 return Math.Max(HeightBST(root.LeftChild), HeightBST(root.RightChild)) + 1;
             }
 
+
+            public int SizeBST(Node root)
+            {
+                if (root == null)
+                    return 0;
+                return SizeBST(root.LeftChild) + SizeBST(root.RightChild) + 1;
+            }
+
             void printUtil(Node root, int space)
             {
                 if (root == null)
@@ -272,12 +280,15 @@ namespace BinarySearchTree
             //int heightBST = tree.HeightBST(tree.root);
             //Console.WriteLine("\nHeight of the BST is {0}", heightBST);
 
+            int sizeBST = tree.SizeBST(tree.root);
+            Console.WriteLine("\nSize of the BST is {0}", sizeBST);
 
-            Console.WriteLine("\nBefore Deleting");
-            tree.Print();
 
-            Console.WriteLine("\nAfter Deleting");
-            tree.Delete(34);
+            //Console.WriteLine("\nBefore Deleting");
+            //tree.Print();
+
+            //Console.WriteLine("\nAfter Deleting");
+            //tree.Delete(34);
             tree.Print();
             Console.ReadLine();
         }
