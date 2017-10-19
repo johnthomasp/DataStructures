@@ -182,6 +182,28 @@ namespace BinarySearchTree
                 Console.Write(root.Data + " ");
             }
 
+            public void LevelOrder(Node root)
+            {
+                if (root == null) return;
+                Queue<Node> q = new Queue<Node>();
+                q.Enqueue(root);
+                while (q.Count != 0)
+                {
+                    root = q.Dequeue();
+                    Console.Write(root.Data + " ");
+
+                    if (root.LeftChild != null)
+                    {
+                        q.Enqueue(root.LeftChild);
+                    }
+
+                    if (root.RightChild != null)
+                    {
+                        q.Enqueue(root.RightChild);
+                    }
+                }
+            }
+
             public Node MinValueBST(Node root)
             {
                 if ((root == null) || (root.LeftChild == null))
@@ -211,7 +233,6 @@ namespace BinarySearchTree
 
                 return Math.Max(HeightBST(root.LeftChild), HeightBST(root.RightChild)) + 1;
             }
-
 
             public int SizeBST(Node root)
             {
@@ -260,7 +281,7 @@ namespace BinarySearchTree
             tree.Add(-1);
             tree.Add(-2);
 
-            //tree.Print();
+            tree.Print();
             //Console.WriteLine(tree.Search(2));
             //Console.WriteLine(tree.Search(100));
 
@@ -270,6 +291,9 @@ namespace BinarySearchTree
             //tree.InOrder(tree.root);
             //Console.WriteLine("\nPostOrder Traversal");
             //tree.PostOrder(tree.root);
+            Console.WriteLine("\nLevelOrder Traversal");
+            tree.LevelOrder(tree.root);
+
 
             //Node minValue = tree.MinValueBST(tree.root);
             //Console.WriteLine("\nMin Value of BST is {0}", minValue.Data);
@@ -280,16 +304,15 @@ namespace BinarySearchTree
             //int heightBST = tree.HeightBST(tree.root);
             //Console.WriteLine("\nHeight of the BST is {0}", heightBST);
 
-            int sizeBST = tree.SizeBST(tree.root);
-            Console.WriteLine("\nSize of the BST is {0}", sizeBST);
-
-
+            //int sizeBST = tree.SizeBST(tree.root);
+            //Console.WriteLine("\nSize of the BST is {0}", sizeBST);
+            
             //Console.WriteLine("\nBefore Deleting");
             //tree.Print();
 
             //Console.WriteLine("\nAfter Deleting");
             //tree.Delete(34);
-            tree.Print();
+            //tree.Print();
             Console.ReadLine();
         }
     }
