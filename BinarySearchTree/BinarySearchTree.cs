@@ -204,9 +204,8 @@ namespace BinarySearchTree
                 }
             }
 
-
             public void LevelOrderPrint(Node root)
-            {    
+            {
                 if (root == null) return;
                 Queue<Node> q = new Queue<Node>();
                 int levelCount = 1;
@@ -238,121 +237,157 @@ namespace BinarySearchTree
                 }
             }
 
-            public Node MinValueBST(Node root)
+            public void LevelOrderReversePrint(Node root)
             {
-                if ((root == null) || (root.LeftChild == null))
-                {
-                    return root;
-                }
-                root = MinValueBST(root.LeftChild);
-                return root;
-            }
+                if (root == null) return;
+                Queue<Node> q = new Queue<Node>();
+                Stack<Node> st = new Stack<Node>();
 
-            public Node MaxValueBST(Node root)
-            {
-                if ((root == null) || (root.RightChild == null))
+                //int levelCount = 1;
+                //int currentCount = 0;
+                q.Enqueue(root);
+                while (q.Count != 0)
                 {
-                    return root;
-                }
-                root = MaxValueBST(root.RightChild);
-                return root;
-            }
+                    root = q.Dequeue();
+                    st.Push(root);
+                    if (root.RightChild != null)
+                    {
+                        q.Enqueue(root.RightChild);
+                    }
 
-            public int HeightBST(Node root)
-            {
-                if (root == null)
-                {
-                    return -1;
+                    //Console.Write(root.Data + " ");
+                    if (root.LeftChild != null)
+                    {
+                        q.Enqueue(root.LeftChild);
+                    }
                 }
 
-                return Math.Max(HeightBST(root.LeftChild), HeightBST(root.RightChild)) + 1;
-            }
-
-            public int SizeBST(Node root)
-            {
-                if (root == null)
-                    return 0;
-                return SizeBST(root.LeftChild) + SizeBST(root.RightChild) + 1;
-            }
-
-            void printUtil(Node root, int space)
-            {
-                if (root == null)
-                    return;
-
-                space += count;
-
-                // Process right child first
-                printUtil(root.RightChild, space);
-                Console.Write("\n");
-                for (int i = count; i < space; i++)
+                while (st.Count != 0)
                 {
-                    Console.Write(" ");
+                    Console.WriteLine(st.Pop().Data.ToString() + " ");
+
                 }
-                Console.Write(root.Data);
-
-                // Process left child
-                printUtil(root.LeftChild, space);
             }
+        
 
-            public void Print()
-            {
-                printUtil(root, 0);
-            }
 
-           
-        }
-
-        static void Main(string[] args)
+        public Node MinValueBST(Node root)
         {
-            BST tree = new BST();
-            tree.Add(5);
-            tree.Add(2);
-            tree.Add(34);
-            tree.Add(18);
-            tree.Add(55);
-            tree.Add(1);
-            tree.Add(3);
-            tree.Add(-1);
-            tree.Add(-2);
-            tree.Add(6);
-            tree.Add(7);
-            tree.Print();
-            //Console.WriteLine(tree.Search(2));
-            //Console.WriteLine(tree.Search(100));
-
-            //Console.WriteLine("PreOrder Traversal");
-            //tree.PreOrder(tree.root);
-            //Console.WriteLine("\nInOrder Traversal");
-            //tree.InOrder(tree.root);
-            //Console.WriteLine("\nPostOrder Traversal");
-            //tree.PostOrder(tree.root);
-            //Console.WriteLine("\nLevelOrder Traversal");
-            //tree.LevelOrder(tree.root);
-
-            Console.WriteLine("\nFormat & Print LevelOrder Traversal");
-            tree.LevelOrderPrint(tree.root);
-
-
-            //Node minValue = tree.MinValueBST(tree.root);
-            //Console.WriteLine("\nMin Value of BST is {0}", minValue.Data);
-
-            //Node maxValue = tree.MaxValueBST(tree.root);
-            //Console.WriteLine("\nMax Value of BST is {0}", maxValue.Data);
-
-            //int heightBST = tree.HeightBST(tree.root);
-            //Console.WriteLine("\nHeight of the BST is {0}", heightBST);
-
-            //int sizeBST = tree.SizeBST(tree.root);
-            //Console.WriteLine("\nSize of the BST is {0}", sizeBST);
-
-            //Console.WriteLine("\nBefore Deleting");
-            //tree.Print();
-
-            //Console.WriteLine("\nAfter Deleting");
-            //tree.Delete(34);
-            //tree.Print();
-            Console.ReadLine();
+            if ((root == null) || (root.LeftChild == null))
+            {
+                return root;
+            }
+            root = MinValueBST(root.LeftChild);
+            return root;
         }
+
+        public Node MaxValueBST(Node root)
+        {
+            if ((root == null) || (root.RightChild == null))
+            {
+                return root;
+            }
+            root = MaxValueBST(root.RightChild);
+            return root;
+        }
+
+        public int HeightBST(Node root)
+        {
+            if (root == null)
+            {
+                return -1;
+            }
+
+            return Math.Max(HeightBST(root.LeftChild), HeightBST(root.RightChild)) + 1;
+        }
+
+        public int SizeBST(Node root)
+        {
+            if (root == null)
+                return 0;
+            return SizeBST(root.LeftChild) + SizeBST(root.RightChild) + 1;
+        }
+
+        void printUtil(Node root, int space)
+        {
+            if (root == null)
+                return;
+
+            space += count;
+
+            // Process right child first
+            printUtil(root.RightChild, space);
+            Console.Write("\n");
+            for (int i = count; i < space; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.Write(root.Data);
+
+            // Process left child
+            printUtil(root.LeftChild, space);
+        }
+
+        public void Print()
+        {
+            printUtil(root, 0);
+        }
+
     }
+
+    static void Main(string[] args)
+    {
+        BST tree = new BST();
+        tree.Add(5);
+        tree.Add(2);
+        tree.Add(34);
+        tree.Add(18);
+        tree.Add(55);
+        tree.Add(1);
+        tree.Add(3);
+        tree.Add(-1);
+        tree.Add(-2);
+        tree.Add(6);
+        tree.Add(7);
+        tree.Print();
+        //Console.WriteLine(tree.Search(2));
+        //Console.WriteLine(tree.Search(100));
+
+        //Console.WriteLine("PreOrder Traversal");
+        //tree.PreOrder(tree.root);
+        //Console.WriteLine("\nInOrder Traversal");
+        //tree.InOrder(tree.root);
+        //Console.WriteLine("\nPostOrder Traversal");
+        //tree.PostOrder(tree.root);
+        //Console.WriteLine("\nLevelOrder Traversal");
+        //tree.LevelOrder(tree.root);
+
+        //Console.WriteLine("\nFormat & Print LevelOrder Traversal");
+        //tree.LevelOrderPrint(tree.root);
+
+        Console.WriteLine("\nPrint Reverse LevelOrder Traversal");
+        tree.LevelOrderReversePrint(tree.root);
+
+
+        //Node minValue = tree.MinValueBST(tree.root);
+        //Console.WriteLine("\nMin Value of BST is {0}", minValue.Data);
+
+        //Node maxValue = tree.MaxValueBST(tree.root);
+        //Console.WriteLine("\nMax Value of BST is {0}", maxValue.Data);
+
+        //int heightBST = tree.HeightBST(tree.root);
+        //Console.WriteLine("\nHeight of the BST is {0}", heightBST);
+
+        //int sizeBST = tree.SizeBST(tree.root);
+        //Console.WriteLine("\nSize of the BST is {0}", sizeBST);
+
+        //Console.WriteLine("\nBefore Deleting");
+        //tree.Print();
+
+        //Console.WriteLine("\nAfter Deleting");
+        //tree.Delete(34);
+        //tree.Print();
+        Console.ReadLine();
+    }
+}
 }
